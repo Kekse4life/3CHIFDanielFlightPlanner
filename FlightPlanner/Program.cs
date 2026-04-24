@@ -105,3 +105,6 @@ namespace FlightPlanner
         }
     }
 }
+
+
+//Single responsibility-Prinzip

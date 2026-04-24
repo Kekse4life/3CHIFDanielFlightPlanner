@@ -1,3 +1,6 @@
+--Was muss man bei Datenbaknprojekten in C# beachten:
+--CRUD muss implementiert werden (duh)
+
 declare @databaseName sysname;
 set @databaseName = 'FlightPlanner';
 

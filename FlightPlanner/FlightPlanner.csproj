@@ -50,6 +50,7 @@
     <Compile Include="DataLayer\Flight.cs" />
     <Compile Include="DataLayer\FlightDataMapper.cs" />
     <Compile Include="DataLayer\FlightRepository.cs" />
+    <Compile Include="DataLayer\PilotDataMapper.cs" />
     <Compile Include="DataLayer\TestHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

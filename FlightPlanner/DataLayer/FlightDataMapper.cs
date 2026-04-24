@@ -10,6 +10,7 @@ using System.Data.Common;
 
 namespace FlightPlanner.DataLayer
 {
+    //Starten mit f5
 
     /// <summary>
     /// Data mapper design pattern: https://en.wikipedia.org/wiki/Data_mapper_pattern    
@@ -81,6 +82,9 @@ namespace FlightPlanner.DataLayer
         {
             // using = try/finally block, in the finally block the database connection is disposed (removed) in case
             // of an error and in case of no error
+            //Bei try/finally kommt man immer rein und es gibt gar kein catch 
+            //Bei finally wird im Main immer eine Methode (dispose) aufgerufen und die beendet die connection mit der Datenbank
+
             using (DbConnection databaseConnection = new SqlConnection(this.ConnectionString))
             {
                 // erzeuge zuerst ein zur Sql Server Connection passendes Command, weise Select Befehl zu
@@ -90,6 +94,7 @@ namespace FlightPlanner.DataLayer
                    $"insert into Flight values ({flight.Id}, '{flight.Departure}', '{flight.Destination}', " +
                    $"{flight.Duration}, '{flight.DepartureDate.ToString("s", System.Globalization.CultureInfo.InvariantCulture)}', " + 
                    $"{flight.PlaneId});";
+                //ISO-Timestamp funktioniert immer, egal ob amerikanische oder normale Schreibweise. 
 
                 // Console.WriteLine NICHT an dieser Stelle in einem professionellen Programm verwenden, 
                 // Methode soll auch bei GUI Anwendungen funktionieren 
