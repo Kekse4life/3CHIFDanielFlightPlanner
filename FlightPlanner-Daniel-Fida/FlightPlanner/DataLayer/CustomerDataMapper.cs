@@ -36,5 +36,32 @@ namespace FlightPlanner
                 return rowCount;
             }
         }
+
+        public void Create(string firstName, string lastName)
+        {
+            using (SqlConnection databaseConnection = new SqlConnection(this.ConnectionString))
+            {
+                string sql = $"insert into Customer (FirstName, LastName) values ('{firstName}', '{lastName}');";
+                SqlCommand command = new SqlCommand(sql, databaseConnection);
+                databaseConnection.Open();
+                command.ExecuteNonQuery();
+            }
+        }
+
+        public void Read(int id)
+        {
+            using (SqlConnection databaseConnection = new SqlConnection(this.ConnectionString))
+            {
+                string sql = $"select * from Customer where Id = {id};";
+                SqlCommand command = new SqlCommand(sql, databaseConnection);
+                databaseConnection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    Console.WriteLine($"Kunde gefunden: {reader["FirstName"]} {reader["LastName"]}");
+                }
+            }
+        }
+
     }
 }

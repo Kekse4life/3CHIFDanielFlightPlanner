@@ -224,7 +224,24 @@ namespace FlightPlanner.DataLayer
                 return rowCount;
             }
         }
-  
+        
+        public int DeleteByCustomerId(int customerId)
+        {
+            using (DbConnection databaseConnection = new SqlConnection(this.ConnectionString))
+            {
+                IDbCommand deleteBookingCommand = databaseConnection.CreateCommand();
+                // Beachte: In deiner DB heißt die Tabelle eventuell "Booking" oder "Bookings". 
+                // Laut deinem DeleteByFlightId ist es "Booking".
+                deleteBookingCommand.CommandText = $"delete from Booking where Booking.CustomerId = {customerId};";
+
+                Console.WriteLine(deleteBookingCommand.CommandText);
+                databaseConnection.Open();
+
+                int rowCount = deleteBookingCommand.ExecuteNonQuery();
+                return rowCount;
+            }
+        }
+
     }
 }
 

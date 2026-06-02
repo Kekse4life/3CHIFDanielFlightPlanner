@@ -41,6 +41,8 @@ namespace FlightPlanner
                 // Recreate the database each time the program is run so that we always work with the same data for testing
                 TestHelper.InitializeDatabase(connectionString);
 
+                BookingDataMapper bookingDataMapper  = new BookingDataMapper(connectionString)
+
                 // CRUD - Create, Read, Update, Delete
                 FlightDataMapper flightDataMapper = new FlightDataMapper(connectionString);
 
