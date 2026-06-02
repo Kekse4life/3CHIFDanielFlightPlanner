@@ -73,6 +73,18 @@ namespace FlightPlanner.DataLayer
         /// </summary>
         /// <param name="Id">The primary key of the flight record.</param>
         /// <returns>Returns an object that stores the flight record.</returns>
+        public Booking Read(int FlightId, int CustomerId)
+        {
+            String sqlCommandText = $"select * from Booking where Booking.FlightId = {FlightId} and Booking.CustomerId = {CustomerId};";
+            List<Booking> bookings = ReadBookings(sqlCommandText);
+            
+            if (bookings.Count > 0)
+            {
+                return bookings[0];
+            }
+            return null;
+        }
+
         public Booking Read(int Id)
         {
             throw new NotImplementedException();
@@ -196,17 +208,41 @@ namespace FlightPlanner.DataLayer
 
         public int Update(Booking booking)
         {
-            throw new NotImplementedException();
+            using (DbConnection databaseConnection = new SqlConnection(this.ConnectionString))
+            {
+                IDbCommand updateBookingCommand = databaseConnection.CreateCommand();
+                updateBookingCommand.CommandText =
+                   $"update Booking set Seats = {booking.Seats}, " +
+                   $"TravelClass = {booking.TravelClass}, " +
+                   $"Price = {booking.Price} " +
+                   $"where Booking.FlightId = {booking.FlightId} and Booking.CustomerId = {booking.CustomerId};";
+
+                Console.WriteLine(updateBookingCommand.CommandText);
+                databaseConnection.Open();
+
+                int rowCount = updateBookingCommand.ExecuteNonQuery();
+                return rowCount;
+            }
         }
 
         public int Delete(Booking booking)
         {
-            throw new NotImplementedException();
+            return Delete(booking.FlightId, booking.CustomerId);
         }
 
         public int Delete(int FlightId, int CustomerId)
         {
-            throw new NotImplementedException();
+            using (DbConnection databaseConnection = new SqlConnection(this.ConnectionString))
+            {
+                IDbCommand deleteBookingCommand = databaseConnection.CreateCommand();
+                deleteBookingCommand.CommandText = $"delete from Booking where Booking.FlightId = {FlightId} and Booking.CustomerId = {CustomerId};";
+
+                Console.WriteLine(deleteBookingCommand.CommandText);
+                databaseConnection.Open();
+
+                int rowCount = deleteBookingCommand.ExecuteNonQuery();
+                return rowCount;
+            }
         }
 
         // Delete
@@ -224,7 +260,24 @@ namespace FlightPlanner.DataLayer
                 return rowCount;
             }
         }
-  
+
+        public int DeleteByCustomerId(int customerId)
+        {
+            using (DbConnection databaseConnection = new SqlConnection(this.ConnectionString))
+            {
+                IDbCommand deleteBookingCommand = databaseConnection.CreateCommand();
+                // Beachte: In deiner DB heißt die Tabelle eventuell "Booking" oder "Bookings". 
+                // Laut deinem DeleteByFlightId ist es "Booking".
+                deleteBookingCommand.CommandText = $"delete from Booking where Booking.CustomerId = {customerId};";
+
+                Console.WriteLine(deleteBookingCommand.CommandText);
+                databaseConnection.Open();
+
+                int rowCount = deleteBookingCommand.ExecuteNonQuery();
+                return rowCount;
+            }
+        }
+
     }
 }
 

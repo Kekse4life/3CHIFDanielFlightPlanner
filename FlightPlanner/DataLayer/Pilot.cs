@@ -1,0 +1,19 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace FlightPlanner.DataLayer
+{
+    internal class Pilot
+    {
+        public int Id { get; set; }
+        public string LastName { get; set; }
+        public DateTime Birthday { get; set; }
+        public string Qualification { get; set; }
+        public int FlightHours { get; set; }
+
+
+    }
+}

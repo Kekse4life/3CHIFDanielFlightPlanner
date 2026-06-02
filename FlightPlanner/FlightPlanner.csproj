@@ -44,19 +44,26 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusinessLogicLayer\BookingService.cs" />
+    <Compile Include="BusinessLogicLayer\CustomerRepository.cs" />
+    <Compile Include="DataLayer\AirlineDataMapper.cs" />
+    <Compile Include="DataLayer\AirlineRepository.cs" />
     <Compile Include="DataLayer\CustomerDataMapper.cs" />
     <Compile Include="DataLayer\Booking.cs" />
     <Compile Include="DataLayer\BookingDataMapper.cs" />
     <Compile Include="DataLayer\Flight.cs" />
     <Compile Include="DataLayer\FlightDataMapper.cs" />
     <Compile Include="DataLayer\FlightRepository.cs" />
+    <Compile Include="DataLayer\Pilot.cs" />
     <Compile Include="DataLayer\PilotDataMapper.cs" />
+    <Compile Include="DataLayer\PilotTrainingDataMapper.cs" />
     <Compile Include="DataLayer\TestHelper.cs" />
+    <Compile Include="DataLayer\TrainingDataMapper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="IMPLEMENTIERUNG_CRUD.md" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="DataLayer\FlightPlannerCreateDb.sql" />
