@@ -244,7 +244,6 @@ PRINT 'Creating tables finished'
 
 use FlightPlanner;
 
-
 INSERT INTO PlaneType VALUES ('Boeing 747', 660, 920);
 INSERT INTO PlaneType VALUES ('Airbus A380', 853, 1185);
 INSERT INTO PlaneType VALUES ('Concorde', 128, 2179);

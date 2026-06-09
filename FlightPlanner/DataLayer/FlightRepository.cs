@@ -25,6 +25,44 @@ namespace FlightPlanner.DataLayer
             flightDataMapper = new FlightDataMapper(this.ConnectionString);
         }
 
+        public void ReadAllFlightsAndCustomersCrossed()
+        {
+            using (DbConnection databaseConnection = new SqlConnection(this.ConnectionString))
+            {
+                IDbCommand command = databaseConnection.CreateCommand();
+
+                // FULL OUTER JOIN sorgt dafür, dass:
+                // 1. Kunden ohne Buchung/Flug aufgereiht werden
+                // 2. Flüge ohne Buchung/Kunde aufgereiht werden
+                command.CommandText = @"
+                    SELECT 
+                        c.Id AS CustomerId, c.FirstName, c.LastName, 
+                        f.Id AS FlightId, f.FlightNumber, b.Seats
+                    FROM Customer c
+                    FULL OUTER JOIN Booking b ON c.Id = b.CustomerId
+                    FULL OUTER JOIN Flight f ON b.FlightId = f.Id;";
+
+                Console.WriteLine("Executing: " + command.CommandText);
+                databaseConnection.Open();
+
+                using (IDataReader reader = command.ExecuteReader())
+                {
+                    Console.WriteLine("\n--- FLUG & KUNDEN ÜBERSICHT ---");
+                    while (reader.Read())
+                    {
+                        // Werte auslesen (und auf NULL prüfen, da FULL JOIN leere Felder erzeugt)
+                        string customerId = reader["CustomerId"] == DBNull.Value ? "Kein Kunde" : reader["CustomerId"].ToString();
+                        string customerName = reader["LastName"] == DBNull.Value ? "" : $"{reader["FirstName"]} {reader["LastName"]}";
+                        string flightId = reader["FlightId"] == DBNull.Value ? "Kein Flug" : reader["FlightId"].ToString();
+                        string flightNumber = reader["FlightNumber"] == DBNull.Value ? "Ungebucht" : reader["FlightNumber"].ToString();
+
+                        Console.WriteLine($"Kunde: [{customerId}] {customerName.PadRight(20)} | Flug: [{flightId}] {flightNumber}");
+                    }
+                    Console.WriteLine("---------------------------------\n");
+                }
+            }
+        }
+
         public void DeleteFlight(int id)
         {
             int rowCount = Int32.MinValue;

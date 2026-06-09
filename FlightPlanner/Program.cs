@@ -35,15 +35,20 @@ namespace FlightPlanner
                 Console.WriteLine("\n========== TEST 2: TRAINING & PILOTTRAINING DATAMAPPER ==========\n");
                 TestTrainingAndPilotTraining(connectionString);
 
-                // ========== TEST 3: CUSTOMER & BOOKING (1:n Beziehung) - BESTEHEND ==========
                 Console.WriteLine("\n========== TEST 3: CUSTOMER & BOOKING DATAMAPPER (BESTEHEND) ==========\n");
                 TestCustomerAndBooking(connectionString);
 
-                // ========== TEST 4: FLIGHT & BOOKING (1:n Beziehung) - BESTEHEND ==========
                 Console.WriteLine("\n========== TEST 4: FLIGHT & BOOKING DATAMAPPER (BESTEHEND) ==========\n");
                 TestFlightAndBooking(connectionString);
 
                 Console.WriteLine("\n========== ALLE TESTS ABGESCHLOSSEN ==========");
+
+
+
+                PilotTraining training = new PilotTraining(111,1,new DateTime(2026,06,05));
+                PilotTrainingDataMapper pilotTrainingDataMapper = new PilotTrainingDataMapper(connectionString);
+                pilotTrainingDataMapper.Create(training);
+
             }
             catch (Exception ex)
             {

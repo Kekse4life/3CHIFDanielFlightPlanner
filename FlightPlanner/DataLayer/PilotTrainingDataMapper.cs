@@ -14,6 +14,13 @@ namespace FlightPlanner.DataLayer
         public int PilotId { get; set; }
         public int TrainingId { get; set; }
         public DateTime Date { get; set; }
+
+        public PilotTraining(int pilotId, int trainingId, DateTime date)
+        {
+            PilotId = pilotId;
+            TrainingId = trainingId;
+            Date = date;
+        }
     }
 
     class PilotTrainingDataMapper
