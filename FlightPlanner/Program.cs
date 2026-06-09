@@ -45,9 +45,25 @@ namespace FlightPlanner
 
 
 
-                PilotTraining training = new PilotTraining(111,1,new DateTime(2026,06,05));
-                PilotTrainingDataMapper pilotTrainingDataMapper = new PilotTrainingDataMapper(connectionString);
-                pilotTrainingDataMapper.Create(training);
+                // ========== SPEZIELLE AUFGABE: FULL OUTER JOIN ABFRAGE ==========
+                Console.WriteLine("\n========== AUFGABE: FULL OUTER JOIN ABFRAGE (MEHRERE TABELLEN) ==========\n");
+                
+                CustomerDataMapper custMapper = new CustomerDataMapper(connectionString);
+                FlightRepository flightRepo = new FlightRepository(connectionString);
+
+                // Vorbereitung: Einen zusätzlichen Kunden ohne Buchung anlegen (um die Aufgabe zu demonstrieren)
+                Console.WriteLine("--- Vorbereitung: Zusätzliche Testdaten ---");
+                custMapper.Create("Susi", "Sorglos");
+                Console.WriteLine("[Info] Neuer Kunde 'Susi Sorglos' wurde erstellt (ohne Buchungen)\n");
+
+                // Jetzt die komplexe Abfrage ausführen
+                // Diese Abfrage wird in der FlightRepository-Klasse implementiert
+                // Sie zeigt:
+                // 1. Alle Kunden mit ihren gebuchten Flügen
+                // 2. Flüge OHNE Buchungen (kein Kunde zugeordnet)
+                // 3. Kunden OHNE Buchungen (kein Flug zugeordnet)
+                Console.WriteLine("--- Ausführung: FULL OUTER JOIN Abfrage ---");
+                flightRepo.ReadAllFlightsAndCustomersCrossed();
 
             }
             catch (Exception ex)
@@ -154,21 +170,13 @@ namespace FlightPlanner
             rowCount = trainingMapper.Create(newTraining2);
             Console.WriteLine($"[Result] Training 2 erstellt. Rows affected: {rowCount}\n");
 
-            PilotTraining pilotTraining1 = new PilotTraining
-            {
-                PilotId = 111,  // Existierender Pilot
-                TrainingId = 9001,
-                Date = new DateTime(2024, 1, 15)
-            };
+            PilotTraining pilotTraining1 = new PilotTraining(111, 9001, new DateTime(2024, 1, 15));
+            
             rowCount = pilotTrainingMapper.Create(pilotTraining1);
             Console.WriteLine($"[Result] PilotTraining 1 erstellt. Rows affected: {rowCount}\n");
 
-            PilotTraining pilotTraining2 = new PilotTraining
-            {
-                PilotId = 111,
-                TrainingId = 9002,
-                Date = new DateTime(2024, 2, 20)
-            };
+            PilotTraining pilotTraining2 = new PilotTraining(111, 9002, new DateTime(2024, 2, 20));
+            
             rowCount = pilotTrainingMapper.Create(pilotTraining2);
             Console.WriteLine($"[Result] PilotTraining 2 erstellt. Rows affected: {rowCount}\n");
 

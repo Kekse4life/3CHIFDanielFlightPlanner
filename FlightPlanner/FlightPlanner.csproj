@@ -63,7 +63,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="AUFGABEN_ERFUELLUNGS_CHECKLISTE.md" />
+    <None Include="FINAL_SUMMARY.md" />
+    <None Include="FULL_OUTER_JOIN_DOKUMENTATION.md" />
     <None Include="IMPLEMENTIERUNG_CRUD.md" />
+    <None Include="README_FULL_OUTER_JOIN.md" />
+    <None Include="TEST_ANLEITUNG_FULL_OUTER_JOIN.md" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="DataLayer\FlightPlannerCreateDb.sql" />

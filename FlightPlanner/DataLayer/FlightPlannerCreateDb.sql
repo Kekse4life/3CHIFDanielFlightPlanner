@@ -204,6 +204,7 @@ CREATE TABLE dbo.Flight (
 
 CREATE TABLE dbo.Customer (
 	Id int primary key,
+	FirstName nvarchar(40) NOT NULL,
 	LastName nvarchar(40) NOT NULL,
 	Birthday date NOT NULL,
 	City nvarchar(40) NOT NULL,
@@ -272,12 +273,12 @@ INSERT INTO Flight VALUES (209, 'Moskau', 'Paris', 210, '20130213', 10);
 INSERT INTO Flight VALUES (210, 'Berlin', 'Moskau', 120, '20120112', 33);
 
 
-INSERT INTO Customer VALUES (1000, 'Scott', '20020110', 'Vienna');
-INSERT INTO Customer VALUES (1001, 'Meier', '20011231', 'Prague');
-INSERT INTO Customer VALUES (1002, 'Huber', '20020515', 'Rome');
-INSERT INTO Customer VALUES (1003, 'King', '20000923', 'Rome');
-INSERT INTO Customer VALUES (1004, 'Puyol', '20000917', 'Paris');
-INSERT INTO Customer VALUES (1005, 'Becaud', '20000916', 'London');
+INSERT INTO Customer VALUES (1000, 'John', 'Scott', '20020110', 'Vienna');
+INSERT INTO Customer VALUES (1001, 'Maria', 'Meier', '20011231', 'Prague');
+INSERT INTO Customer VALUES (1002, 'Peter', 'Huber', '20020515', 'Rome');
+INSERT INTO Customer VALUES (1003, 'Paul', 'King', '20000923', 'Rome');
+INSERT INTO Customer VALUES (1004, 'Carlos', 'Puyol', '20000917', 'Paris');
+INSERT INTO Customer VALUES (1005, 'Gilbert', 'Becaud', '20000916', 'London');
 
 
 INSERT INTO Pilot VALUES (111, 'Nemec', '20020603', 'Captain', 80, '20150101', 2);

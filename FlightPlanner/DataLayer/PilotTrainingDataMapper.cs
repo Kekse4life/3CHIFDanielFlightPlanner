@@ -34,10 +34,8 @@ namespace FlightPlanner.DataLayer
 
         private PilotTraining ParseRecord(IDataReader pilotTrainingReader)
         {
-            PilotTraining pilotTraining = new PilotTraining();
-            pilotTraining.PilotId = pilotTrainingReader.GetInt32(0);
-            pilotTraining.TrainingId = pilotTrainingReader.GetInt32(1);
-            pilotTraining.Date = pilotTrainingReader.GetDateTime(2);
+            PilotTraining pilotTraining = new PilotTraining(pilotTrainingReader.GetInt32(0), 
+                pilotTrainingReader.GetInt32(1), pilotTrainingReader.GetDateTime(2));
             return pilotTraining;
         }
 
